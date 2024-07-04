@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import NotFound from "./pages/notFound";
 import Login from "./pages/login";
 import CvUpload from "./pages/cvUpload";
 import Signup from "./pages/signup";
@@ -7,6 +8,9 @@ import UserCvList from "./admin/userCvList";
 import UserCvView from "./admin/userCvView";
 import SchInterview from "./admin/schInterview";
 import SendRejection from "./admin/sendRejection";
+import AssessmentAsign from "./admin/assessmentAsign";
+import Bgcheck from "./admin/bgcheck";
+import SendOfferLetter from "./admin/sendOfferLetter";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -44,8 +48,28 @@ const router = createBrowserRouter([
        
     },
     {
+        path: "/assessmentasign",
+        element: <AssessmentAsign />
+       
+    },
+    {
         path: "/sendrejection",
         element: <SendRejection />
+       
+    },
+    {
+        path: "/sendofferletter",
+        element: <SendOfferLetter />
+       
+    },
+    {
+        path: "/bgcheck",
+        element: <Bgcheck />
+       
+    },
+    {
+        path: "/*",
+        element: <NotFound />
        
     }
 
