@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import NotFound from "./pages/notFound";
 import Login from "./pages/login";
+import Login2 from "./pages/login2";
 import CvUpload from "./pages/cvUpload";
 import Signup from "./pages/signup";
 import Admindash from "./admin/admindash";
@@ -12,9 +13,15 @@ import AssessmentAsign from "./admin/assessmentAsign";
 import Bgcheck from "./admin/bgcheck";
 import SendOfferLetter from "./admin/sendOfferLetter";
 const router = createBrowserRouter([
+    
     {
         path: "/",
         element: <Login />
+       
+    },
+    {
+        path: "/login2",
+        element: <Login2 />
        
     },
 
