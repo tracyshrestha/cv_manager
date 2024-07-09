@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import NotFound from "./pages/notFound";
 import Login from "./pages/login";
 import Login2 from "./pages/login2";
+import Practice from "./pages/practice";
 import CvUpload from "./admin/cvUpload";
 import Signup from "./pages/signup";
 import Sidebar from "./admin/sidebar";
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
     {
         path: "/login2",
         element: <Login2 />
+       
+    },
+    {
+        path: "/practice",
+        element: <Practice />
        
     },
 

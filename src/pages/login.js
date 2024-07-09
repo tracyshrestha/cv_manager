@@ -28,7 +28,7 @@ function Login() {
 
       if (response.ok) {
         console.log('Login successful:', result);
-        navigate('/cvupload');
+        navigate('/admindash');
       } else {
         setError(result.msg || 'Login failed. Please try again.');
       }
