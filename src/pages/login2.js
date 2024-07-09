@@ -11,7 +11,7 @@ const UserCvList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://swcstgbe.cellapp.co/api/cvlists', {
+        const response = await fetch('https://swcstgbe.cellapp.co/api/cv/hired', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import searchIcon from '../assets/search.png';
 import arrowBack from '../assets/arrow_back.png';
 import arrowBack2 from '../assets/arrow_back2.png';
 
-const UserCvList = () => {
+const HiredCvList = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 7;
@@ -11,7 +11,7 @@ const UserCvList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://swcstgbe.cellapp.co/api/cvlists', {
+        const response = await fetch('https://swcstgbe.cellapp.co/api/cv/hired', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const UserCvList = () => {
     <div className="h-screen w-[1000px] bg-[#ffffff]">
       <div className="flex flex-col bg-white px-[30px] pt-[20px] shadow-xl">
         <div className="mt-[-5px] bg-[#ffffff]">
-          <h6 className="mt-[-8px] text-[48px] font-bold text-[#42a7ff]">CV List</h6>
+          <h6 className="mt-[-8px] text-[48px] font-bold text-[#42a7ff]">Hired List</h6>
         </div>
       </div>
 
@@ -106,4 +106,4 @@ const UserCvList = () => {
   );
 };
 
-export default UserCvList;
+export default HiredCvList;
