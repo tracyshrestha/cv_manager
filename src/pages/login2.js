@@ -1,215 +1,109 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import searchIcon from '../assets/search.png';
+import arrowBack from '../assets/arrow_back.png';
+import arrowBack2 from '../assets/arrow_back2.png';
 
-const CvUpload = () => {
-  const [name, setName] = useState('');
-  const [tech, setTech] = useState([]);
-  const [level, setLevel] = useState('');
-  const [salaryExp, setSalaryExp] = useState('');
-  const [exp, setExp] = useState('');
-  const [number, setNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [ref, setRef] = useState('');
-  const [file, setFile] = useState(null);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+const UserCvList = () => {
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 7;
 
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-    // Validate file type
-    const allowedTypes = ["application/msword", "application/pdf", "image/jpeg", "image/png"];
-    if (selectedFile && allowedTypes.includes(selectedFile.type)) {
-      // Validate file size (up to 10MB)
-      if (selectedFile.size <= 10 * 1024 * 1024) {
-        setFile(selectedFile);
-        setError(null);
-      } else {
-        setError('File size exceeds 10MB limit.');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://swcstgbe.cellapp.co/api/cvlists', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+          },
+        });
+
+        const result = await response.json();
+        if (result[1] && Array.isArray(result[1].vdata)) {
+          setUsers(result[1].vdata);
+        } else {
+          console.error('Unexpected response format:', result);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-    } else {
-      setError('Invalid file type. Please upload Doc, PDF, JPEG, or PNG files.');
-    }
-  };
+    };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(null);
-    setSuccess(null);
+    fetchData();
+  }, []);
 
-    const techList = tech.join(', ');
+  // Get current users
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('tech', techList);
-    formData.append('level', level);
-    formData.append('salaryexp', salaryExp);
-    formData.append('exp', exp);
-    formData.append('number', number);
-    formData.append('email', email);
-    formData.append('ref', ref);
-    if (file) {
-      formData.append('image', file);
-    }
-
-    try {
-      const response = await fetch('https://swcstgbe.cellapp.co/api/store/cv', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSuccess('CV uploaded successfully.');
-      } else {
-        setError(result.msg || 'Upload failed. Please try again.');
-      }
-    } catch (error) {
-      setError('An error occurred. Please try again.');
-    }
-  };
-
-  const handleTechChange = (techName) => {
-    setTech((prevTech) =>
-      prevTech.includes(techName)
-        ? prevTech.filter((tech) => tech !== techName)
-        : [...prevTech, techName]
-    );
-  };
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className='w-full h-full grid bg-[#ffffff]'>
-      <div className='py-[20px] flex flex-col justify-center items-center h-screen'>
-        <form onSubmit={handleSubmit} className="w-[350px] sm:w-[900px] h-[700px] items-center rounded-sm border-[#f8f8f8] px-[80px] my-[100px]  shadow-xl">
-          <div className="items-center mt-[25px]">
-            <h6 className="flex items-center justify-center text-[33px] font-bold text-[#3694e6]">
-              Upload Your CV
-            </h6>
-          </div>
-          <div className="mt-[20px] text-[17px] border-2 rounded-lg border-[#dadada] p-1">
-            <label className="input input-bordered flex items-center gap-2 rounded-md">
-              <input
-                type="text"
-                className="grow border-none outline-none focus:border-none focus:ring-0 focus:outline-none text-[#A9A9A9]"
-                required
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="mt-[20px] text-[17px]">
-            <label className="input input-bordered flex items-center gap-2 mt-2 text-[#A9A9A9] border-2 rounded-lg border-[#dadada] p-1">
-              <span className="text-[#A9A9A9]">Technologies</span>
-              <label className="flex items-center pl-4">
-                <input type="checkbox" className="form-checkbox h-4 w-4 rounded" onChange={() => handleTechChange('ReactJS')} />
-                <span className="pl-2">ReactJS</span>
-              </label>
-              <label className="flex items-center pl-4">
-                <input type="checkbox" className="form-checkbox h-4 w-4 rounded" onChange={() => handleTechChange('QA')} />
-                <span className="pl-2">QA</span>
-              </label>
-              <label className="flex items-center pl-4">
-                <input type="checkbox" className="form-checkbox h-4 w-4 rounded" onChange={() => handleTechChange('Java')} />
-                <span className="pl-2">Java</span>
-              </label>
-            </label>
-          </div>
-          <div className='flex flex-col mb-4 mt-[20px]'>
-            <div className='relative text-[#A9A9A9] text-[17px] text-left border-2 rounded-lg border-[#dadada] p-1'>
-              Level:
-              <select className="text-[#A9A9A9]" name='level' value={level} onChange={(e) => setLevel(e.target.value)}>
-                <option value="">&nbsp;&nbsp;&nbsp;------</option>
-                <option value="Junior">Junior</option>
-                <option value="Mid">Mid</option>
-                <option value="Senior">Senior</option>
-                <option value="Lead">Lead</option>
-              </select>
-            </div>
-          </div>
-          <div className="mt-[20px] text-[17px] border-2 rounded-lg border-[#dadada] p-1">
-            <label className="input input-bordered flex items-center gap-2 border-[#cfcfcf] bg-[#ffffff]">
-              <input
-                type="number"
-                className="grow border-none outline-none focus:border-none focus:ring-0 focus:outline-none text-[#A9A9A9]"
-                required
-                placeholder="Experience in years"
-                value={exp}
-                onChange={(e) => setExp(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="mt-[20px] text-[17px] border-2 rounded-lg border-[#dadada] p-1">
-            <label className="input input-bordered flex items-center gap-2 border-[#cfcfcf] bg-[#ffffff]">
-              <input
-                type="number"
-                className="grow border-none outline-none focus:border-none focus:ring-0 focus:outline-none text-[#A9A9A9]"
-                required
-                placeholder="Salary Expectations"
-                value={salaryExp}
-                onChange={(e) => setSalaryExp(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="mt-[20px] text-[17px]">
-            <label className="input input-bordered flex items-center gap-2 border-2 rounded-lg border-[#dadada] p-1">
-              <input
-                type="number"
-                className="grow border-none outline-none focus:border-none focus:ring-0 focus:outline-none text-[#A9A9A9]"
-                required
-                placeholder="Number"
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="mt-[20px] text-[17px]">
-            <label className="input input-bordered flex items-center gap-2 border-2 rounded-lg border-[#dadada] p-1">
-              <input
-                type="email"
-                className="grow border-none outline-none focus:border-none focus:ring-0 focus:outline-none text-[#A9A9A9]"
-                required
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="mt-[20px] text-[17px]">
-            <label className="input input-bordered flex items-center gap-2 border-2 rounded-lg border-[#dadada] p-1">
-              <input
-                type="email"
-                className="grow border-none outline-none focus:border-none focus:ring-0 focus:outline-none text-[#A9A9A9]"
-                required
-                placeholder="Reference's email"
-                value={ref}
-                onChange={(e) => setRef(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="mt-[20px] text-[17px]">
-            <label className="input input-bordered flex items-center gap-2 border-2 rounded-lg border-[#dadada] p-1">
-              <input
-                type="file"
-                accept=".doc, .docx, .pdf, .jpeg, .jpg, .png"
-                className="grow border-none outline-none focus:border-none focus:ring-0 focus:outline-none text-[#A9A9A9]"
-                onChange={handleFileChange}
-              />
-            </label>
-            {file && <p className="text-[#4CAF50] mt-[10px]">Selected file: {file.name}</p>}
-          </div>
-
-          {error && <p className="text-red-500 mt-[20px]">{error}</p>}
-          {success && <p className="text-green-500 mt-[20px]">{success}</p>}
-
-          <div className="flex flex-col items-center mt-[30px]">
-            <button type="submit" className="relative w-full rounded-md bg-[#42a7ff] py-3 text-center font-bold text-white hover:bg-[#4D6B9C]">
-              Save
-            </button>
-          </div>
-        </form>
+    <div className="h-screen w-[1000px] bg-[#ffffff]">
+      <div className="flex flex-col bg-white px-[30px] pt-[20px] shadow-xl">
+        <div className="mt-[-5px] bg-[#ffffff]">
+          <h6 className="mt-[-8px] text-[48px] font-bold text-[#3758F9]">CV List</h6>
+        </div>
       </div>
+
+      <div className="overflow-x-auto border-2 border-[#cecece] bg-white text-[14px] text-black px-8">
+        <table className="table-auto w-full">
+          <thead className="text-black">
+            <tr>
+              <th className="px-4 py-2">ID</th>
+              <th className="px-4 py-2">Name</th>
+              <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">Experience</th>
+              <th className="px-4 py-2">Salary</th>
+              <th className="px-4 py-2">Tech</th>
+              <th className="px-4 py-2">Level</th>
+              <th className="px-4 py-2">Status</th>
+              <th className="px-4 py-2 text-center w-2/6">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentUsers.map((user) => (
+              <tr key={user.id}>
+                <td className="px-4 py-2">{user.id}</td>
+                <td className="px-4 py-2">{user.name}</td>
+                <td className="px-4 py-2">{user.email}</td>
+                <td className="px-4 py-2">{user.exp}</td>
+                <td className="px-4 py-2">{user.salaryexp}</td>
+                <td className="px-4 py-2">{user.tech}</td>
+                <td className="px-4 py-2">{user.level}</td>
+                <td className="px-4 py-2">{user.status}</td>
+                <td className="px-4 py-2 text-center w-2/6">
+                  <button className="rounded-lg bg-white border border-[#3758F9] px-4 py-2 font-semibold text-[#3758F9] hover:bg-blue-700 hover:text-white">Edit</button>
+                  <button className="rounded-lg bg-white border border-[#DB0F28] px-4 py-2 font-semibold text-[#DB0F28] hover:bg-[#DB0F28] hover:text-white">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <nav className="flex-column flex flex-wrap items-center justify-between pt-4 md:flex-row" aria-label="Table navigation">
+        <ul className="inline-flex h-8 w-full justify-center -space-x-px text-sm rtl:space-x-reverse">
+          {Array.from({ length: Math.ceil(users.length / usersPerPage) }, (_, index) => (
+            <li key={index + 1}>
+              <a
+                href="#"
+                onClick={() => paginate(index + 1)}
+                className={`flex h-8 items-center justify-center border bg-white px-3 leading-tight ${
+                  currentPage === index + 1 ? 'bg-[#3758F9] text-white' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
+                }`}
+              >
+                {index + 1}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 };
 
-export default CvUpload;
+export default UserCvList;
