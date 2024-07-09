@@ -15,7 +15,7 @@ const Sidebar = () => {
     <div className="flex h-screen w-screen bg-[#fff]">
       {/* Sidebar */}
       <div className="flex h-full w-[300px] flex-col rounded-l-2xl text-white p-[16px]">
-        <div className="flex h-full w-[198px] flex-col rounded-l-2xl bg-[#42a7ff] pt-[24px] text-white">
+        <div className="flex h-full w-[198px] flex-col rounded-l-2xl bg-[#42a7ff] pt-[24px] text-white sticky top-0">
 
           <div>
             <a href="/admindash">
@@ -71,7 +71,7 @@ const Sidebar = () => {
             <a href="/signup">
               <div className="mb-6 flex items-center pl-[15px]">
                 <img src={logoutIcon} alt="Icon" className="mr-2 h-[24px] opacity-70" />
-                <h1 className="font-bold">Logout</h1>
+                <h1 className="font-bold">Loggout</h1>
               </div></a>
           </div>
         </div>

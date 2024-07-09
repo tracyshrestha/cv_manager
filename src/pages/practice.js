@@ -78,8 +78,8 @@ const CvUpload = () => {
 
   return (
     <div className='w-full h-full grid bg-[#ffffff]'>
-      <div className='py-[20px] flex flex-col justify-center items-center h-screen'>
-        <form onSubmit={handleSubmit} className="w-[350px] sm:w-[900px] h-[700px] items-center rounded-sm border-[#f8f8f8] px-[80px] my-[100px]  shadow-xl">
+      <div className='p-4 flex flex-col justify-center items-center h-screen'>
+        <form onSubmit={handleSubmit} className="w-[350px] sm:w-[900px] h-full items-center rounded-sm border-[#f8f8f8] px-[80px] pt-[10px] m-[0px] shadow-xl">
           <div className="items-center mt-[25px]">
             <h6 className="flex items-center justify-center text-[33px] font-bold text-[#3694e6]">
               Upload Your CV
@@ -132,7 +132,7 @@ const CvUpload = () => {
                 type="number"
                 className="grow border-none outline-none focus:border-none focus:ring-0 focus:outline-none text-[#A9A9A9]"
                 required
-                placeholder="Experience in years"
+                placeholder="Experience"
                 value={exp}
                 onChange={(e) => setExp(e.target.value)}
               />
