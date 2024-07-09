@@ -78,11 +78,11 @@ const CvUpload = () => {
   };
 
   return (
-    <div className=' md:grid grid-cols-5 w-screen h-full '>
-      <Sidebar />
-      <div className='col-span-4 full'>
+   
+
+      <div className='col-span-4 h-full'>
         <div className='w-full h-full grid bg-[#ffffff]'>
-          <div className='py-[20px] flex flex-col justify-center items-center h-screen my-12'>
+          <div className='py-[20px] flex flex-col justify-center items-center h-screen my-12 '>
             <form onSubmit={handleSubmit} className="w-[350px] sm:w-[900px] h-[700px] items-center rounded-sm border-[#f8f8f8] px-[20px] my-[100px] pb-14 shadow-xl">
               <div className="items-center mt-[25px]">
                 <h6 className="flex items-center justify-center text-[33px] font-bold text-[#3694e6]">
@@ -214,7 +214,7 @@ const CvUpload = () => {
           </div>
         </div>
       </div>
-    </div >
+    
   );
 };
 

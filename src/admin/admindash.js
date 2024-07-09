@@ -7,8 +7,8 @@ const adminDash = () => {
 
   return (
     <div className=' md:grid grid-cols-5 w-screen h-full '>
-      <Sidebar />
-      <div className='col-span-4 full'>
+      
+      <div className='col-span-4 w-full'>
         <div className=' h-screen flex  flex-col justify-center items-center bg-[#ffffff] '>
 
           <div className='flex justify-center items-center sm:h-[80px] sm:w-full h-[25px] w-[350px] rounded-sm  '>
