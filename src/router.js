@@ -5,10 +5,11 @@ import Login2 from './pages/login2';
 import Practice from './pages/practice';
 import CvUpload from './admin/cvUpload';
 import Signup from './pages/signup';
-import MainLayout from './pages/mainLayout'; // Import the MainLayout component
+import MainLayout from './pages/mainLayout'; 
 import Admindash from './admin/admindash';
 import UserCvList from './admin/userCvList';
 import UserCvView from './admin/userCvView';
+import HiredCvList from './admin/hiredCvList';
 import SchInterview from './admin/schInterview';
 import SendRejection from './admin/sendRejection';
 import AssessmentAsign from './admin/assessmentAsign';
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: '/usercvlist',
                 element: <UserCvList />,
+            },
+            {
+                path: '/hiredcvlist',
+                element: <HiredCvList />,
             },
             {
                 path: '/usercvview',

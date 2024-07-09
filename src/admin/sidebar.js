@@ -66,8 +66,8 @@ const Sidebar = () => {
                 <h1 className="font-bold">Evaluation</h1>
               </div>
             </Link>
-            <Link to="/usercvview">
-              <div className={`mb-0 flex items-center pl-[15px] h-[58px] ${linkStyle("/usercvview")}`}>
+            <Link to="/hiredcvlist">
+              <div className={`mb-0 flex items-center pl-[15px] h-[58px] ${linkStyle("/hiredcvlist")}`}>
                 <img src={work} alt="Icon" className="mr-2 h-[24px] opacity-70" />
                 <h1 className="font-bold">Hired CV Lists</h1>
               </div>
