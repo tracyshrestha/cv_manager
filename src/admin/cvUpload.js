@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './sidebar';
 
 const CvUpload = () => {
   const [name, setName] = useState('');
