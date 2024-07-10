@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import searchIcon from '../assets/search.png';
-import arrowBack from '../assets/arrow_back.png';
-import arrowBack2 from '../assets/arrow_back2.png';
 
 const UserCvList = () => {
   const [users, setUsers] = useState([]);
@@ -76,8 +73,8 @@ const UserCvList = () => {
                 <td className="px-4 py-2">{user.level}</td>
                 <td className="px-4 py-2">{user.status}</td>
                 <td className="px-4 py-2 text-center w-2/6">
-                  <button className="rounded-lg bg-white border border-[#3758F9] px-4 py-2 font-semibold text-[#3758F9] hover:bg-blue-700 hover:text-white">Edit</button>
-                  <button className="rounded-lg bg-white border border-[#DB0F28] px-4 py-2 font-semibold text-[#DB0F28] hover:bg-[#DB0F28] hover:text-white">Delete</button>
+                  <button className="rounded-lg bg-[#42a7ff]  border border-[#42a7ff] px-4 py-2 font-semibold  hover:bg-[#2b43be]  text-white">Edit</button>
+                  <button className="rounded-lg bg-[#ff3e54]  border border-[#ff3e54] px-4 py-2 font-semibold  hover:bg-[#a80f21] text-white">Delete</button>
                 </td>
               </tr>
             ))}
@@ -93,7 +90,7 @@ const UserCvList = () => {
                 href="#"
                 onClick={() => paginate(index + 1)}
                 className={`flex h-8 items-center justify-center border bg-white px-3 leading-tight ${
-                  currentPage === index + 1 ? 'bg-[#3758F9] text-white' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
+                  currentPage === index + 1 ? 'bg-[#cfd7ff] text-[#3758F9]' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700 '
                 }`}
               >
                 {index + 1}

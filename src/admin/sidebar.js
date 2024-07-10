@@ -86,7 +86,7 @@ const Sidebar = () => {
 
           {/* Bottom Section */}
           <div>
-            <Link to="/signup">
+            <Link to="/">
               <div className={`mb-6 flex items-center pl-[15px] ${linkStyle("/signup")}`}>
                 <img src={logoutIcon} alt="Icon" className="mr-2 h-[24px] opacity-70" />
                 <h1 className="font-bold">Logout</h1>

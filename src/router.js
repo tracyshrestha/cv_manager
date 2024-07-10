@@ -12,6 +12,7 @@ import UserCvView from './admin/userCvView';
 import HiredCvList from './admin/hiredCvList';
 import SchInterview from './admin/schInterview';
 import Interviewer from './admin/interviewer';
+import AddInterviewer from './admin/interviewerAdd';
 import SendRejection from './admin/sendRejection';
 import AssessmentAsign from './admin/assessmentAsign';
 import Bgcheck from './admin/bgcheck';
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path: '/interviewer',
                 element: <Interviewer />,
+            },
+            {
+                path: '/addinterviewer',
+                element: <AddInterviewer />,
             },
             {
                 path: '/assessmentasign',

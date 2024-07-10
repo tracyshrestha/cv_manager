@@ -93,7 +93,7 @@ const HiredCvList = () => {
                 href="#"
                 onClick={() => paginate(index + 1)}
                 className={`flex h-8 items-center justify-center border bg-white px-3 leading-tight ${
-                  currentPage === index + 1 ? 'bg-[#3758F9] text-white' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
+                  currentPage === index + 1 ? 'bg-[#cfd7ff] text-[#3758F9]' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700 '
                 }`}
               >
                 {index + 1}
