@@ -30,6 +30,29 @@ const UserCvList = () => {
     fetchData();
   }, []);
 
+  // Function to handle the deletion
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`https://swcstgbe.cellapp.co/api/delete/cv/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'accept': 'application/json',
+        },
+      });
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        // Remove the user from the list
+        setUsers(users.filter(user => user.id !== id));
+      } else {
+        console.error('Error deleting data:', result.message);
+      }
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+  };
+
   // Get current users
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -50,7 +73,6 @@ const UserCvList = () => {
         <table className="table-auto w-full">
           <thead className="text-black">
             <tr>
-             
               <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Email</th>
               <th className="px-4 py-2">Experience</th>
@@ -64,7 +86,6 @@ const UserCvList = () => {
           <tbody>
             {currentUsers.map((user) => (
               <tr key={user.id}>
-               
                 <td className="px-4 py-2">{user.name}</td>
                 <td className="px-4 py-2">{user.email}</td>
                 <td className="px-4 py-2">{user.exp}</td>
@@ -74,7 +95,12 @@ const UserCvList = () => {
                 <td className="px-4 py-2">{user.status}</td>
                 <td className="px-4 py-2 text-center w-2/6">
                   <button className="rounded-lg bg-[#42a7ff]  border border-[#42a7ff] px-4 py-2 font-semibold  hover:bg-[#2b43be]  text-white">Edit</button>
-                  <button className="rounded-lg bg-[#ff3e54]  border border-[#ff3e54] px-4 py-2 font-semibold  hover:bg-[#a80f21] text-white">Delete</button>
+                  <button
+                    className="rounded-lg bg-[#ff3e54]  border border-[#ff3e54] px-4 py-2 font-semibold  hover:bg-[#a80f21] text-white"
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

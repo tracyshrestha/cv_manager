@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import searchIcon from '../assets/search.png';
-import arrowBack from '../assets/arrow_back.png';
-import arrowBack2 from '../assets/arrow_back2.png';
+
 
 const HiredCvList = () => {
   const [users, setUsers] = useState([]);
