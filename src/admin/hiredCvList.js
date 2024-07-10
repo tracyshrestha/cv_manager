@@ -53,7 +53,7 @@ const HiredCvList = () => {
         <table className="table-auto w-full">
           <thead className="text-black">
             <tr>
-              <th className="px-4 py-2">ID</th>
+        
               <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Email</th>
               <th className="px-4 py-2">Experience</th>
@@ -67,7 +67,7 @@ const HiredCvList = () => {
           <tbody>
             {currentUsers.map((user) => (
               <tr key={user.id}>
-                <td className="px-4 py-2">{user.id}</td>
+               
                 <td className="px-4 py-2">{user.name}</td>
                 <td className="px-4 py-2">{user.email}</td>
                 <td className="px-4 py-2">{user.exp}</td>

@@ -4,6 +4,7 @@ import logoutIcon from '../assets/logout.png';
 import white_user from '../assets/white_user.png';
 import uploadcv from '../assets/uploadcv.png';
 import list from '../assets/list.png';
+import interviewer from '../assets/interviewer.png';
 import schedule from '../assets/schedule.png';
 import assignment from '../assets/assignment.png';
 import evaluation from '../assets/evaluation.png';
@@ -18,7 +19,7 @@ const Sidebar = () => {
   const linkStyle = (path) => isActive(path) ? "font-bold text-white bg-[#2d81ca]" : "font-bold text-white";
 
   return (
-    <div className="flex h-screen w-screen bg-[#fff]">
+    <div className="flex h-full w-screen bg-[#fff]">
       {/* Sidebar */}
       <div className="flex h-full w-[300px] flex-col rounded-l-2xl text-white p-[16px]">
         <div className="flex h-full w-[225px] flex-col rounded-l-2xl bg-[#42a7ff] pt-[24px] text-white sticky top-0">
@@ -46,6 +47,12 @@ const Sidebar = () => {
               <div className={`mb-0 flex items-center pl-[15px] h-[58px] ${linkStyle("/schinterview")}`}>
                 <img src={schedule} alt="Icon" className="mr-2 h-[24px] opacity-70" />
                 <h1 className="font-bold">Schedule Interview</h1>
+              </div>
+            </Link>
+            <Link to="/interviewer">
+              <div className={`mb-0 flex items-center pl-[15px] h-[58px] ${linkStyle("/interviewer")}`}>
+                <img src={interviewer} alt="Icon" className="mr-2 h-[24px] opacity-70" />
+                <h1 className="font-bold">Interviewer</h1>
               </div>
             </Link>
             <Link to="/assessmentasign">
