@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserCvList = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 7;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +32,6 @@ const UserCvList = () => {
     fetchData();
   }, []);
 
-  // Function to handle the deletion
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`https://swcstgbe.cellapp.co/api/delete/cv/${id}`, {
@@ -43,7 +44,6 @@ const UserCvList = () => {
 
       const result = await response.json();
       if (result.status === 'success') {
-        // Remove the user from the list
         setUsers(users.filter(user => user.id !== id));
       } else {
         console.error('Error deleting data:', result.message);
@@ -53,13 +53,15 @@ const UserCvList = () => {
     }
   };
 
-  // Get current users
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleView = (id) => {
+    navigate('/usercvview', { state: { id } });
+  };
 
   return (
     <div className="h-screen w-[1000px] bg-[#ffffff]">
@@ -70,7 +72,7 @@ const UserCvList = () => {
       </div>
 
       <div className="overflow-x-auto border-2 border-[#cecece] bg-white text-[14px] text-black px-8">
-        <table className="table-auto w-full">
+        <table className="table-auto mx-[-10px] w-full">
           <thead className="text-black">
             <tr>
               <th className="px-4 py-2">Name</th>
@@ -80,7 +82,7 @@ const UserCvList = () => {
               <th className="px-4 py-2">Tech</th>
               <th className="px-4 py-2">Level</th>
               <th className="px-4 py-2">Status</th>
-              <th className="px-4 py-2 text-center w-2/6">Action</th>
+              <th className="px-4 py-2 text-center w-[200px]">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -93,14 +95,21 @@ const UserCvList = () => {
                 <td className="px-4 py-2">{user.tech}</td>
                 <td className="px-4 py-2">{user.level}</td>
                 <td className="px-4 py-2">{user.status}</td>
-                <td className="px-4 py-2 text-center w-2/6">
-                  <button className="rounded-lg bg-[#42a7ff]  border border-[#42a7ff] px-4 py-2 font-semibold  hover:bg-[#2b43be]  text-white">Edit</button>
-                  <button
-                    className="rounded-lg bg-[#ff3e54]  border border-[#ff3e54] px-4 py-2 font-semibold  hover:bg-[#a80f21] text-white"
-                    onClick={() => handleDelete(user.id)}
-                  >
-                    Delete
-                  </button>
+                <td className="px-4 py-2 text-center w-[200px]">
+                  <div className="flex justify-center space-x-2">
+                    <button
+                      className="rounded-lg bg-[#42a7ff] border border-[#42a7ff] px-4 py-2 font-semibold hover:bg-[#2b43be] text-white"
+                      onClick={() => handleView(user.id)}
+                    >
+                      Edit 
+                    </button>
+                    <button
+                      className="rounded-lg bg-[#ff3e54] border border-[#ff3e54] px-4 py-2 font-semibold hover:bg-[#a80f21] text-white"
+                      onClick={() => handleDelete(user.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -115,9 +124,7 @@ const UserCvList = () => {
               <a
                 href="#"
                 onClick={() => paginate(index + 1)}
-                className={`flex h-8 items-center justify-center border bg-white px-3 leading-tight ${
-                  currentPage === index + 1 ? 'bg-[#cfd7ff] text-[#3758F9]' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700 '
-                }`}
+                className={`flex h-8 items-center justify-center border bg-white px-3 leading-tight ${currentPage === index + 1 ? 'bg-[#cfd7ff] text-[#3758F9]' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700 '}`}
               >
                 {index + 1}
               </a>

@@ -43,12 +43,12 @@ const Sidebar = () => {
                 <h1 className="font-bold">CV List</h1>
               </div>
             </Link>
-            <Link to="/schinterview">
+            {/* <Link to="/schinterview">
               <div className={`mb-0 flex items-center pl-[15px] h-[58px] ${linkStyle("/schinterview")}`}>
                 <img src={schedule} alt="Icon" className="mr-2 h-[24px] opacity-70" />
                 <h1 className="font-bold">Schedule Interview</h1>
               </div>
-            </Link>
+            </Link> */}
             <Link to="/interviewer">
               <div className={`mb-0 flex items-center pl-[15px] h-[58px] ${linkStyle("/interviewer")}`}>
                 <img src={interviewer} alt="Icon" className="mr-2 h-[24px] opacity-70" />
@@ -67,12 +67,12 @@ const Sidebar = () => {
                 <h1 className="font-bold">Send Offer</h1>
               </div>
             </Link>
-            <Link to="/bgcheck">
+            {/* <Link to="/bgcheck">
               <div className={`mb-0 flex items-center pl-[15px] h-[58px] ${linkStyle("/bgcheck")}`}>
                 <img src={evaluation} alt="Icon" className="mr-2 h-[24px] opacity-70" />
                 <h1 className="font-bold">Evaluation</h1>
               </div>
-            </Link>
+            </Link> */}
             <Link to="/hiredcvlist">
               <div className={`mb-0 flex items-center pl-[15px] h-[58px] ${linkStyle("/hiredcvlist")}`}>
                 <img src={work} alt="Icon" className="mr-2 h-[24px] opacity-70" />
