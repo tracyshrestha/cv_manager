@@ -44,7 +44,7 @@ const InterviewerAdd = () => {
         <div className='col-span-4 h-full'>
             <div className='w-full h-full grid bg-[#ffffff]'>
                 <div className='py-[20px] flex flex-col justify-center items-center h-screen my-12 '>
-                    <form onSubmit={handleSubmit} className="w-[350px] sm:w-[900px] h-[700px] items-center rounded-sm border-[#f8f8f8] px-[20px] my-[100px] pb-14 shadow-xl">
+                    <form onSubmit={handleSubmit} className="mr-[-20px] w-[350px] sm:w-[900px] h-[700px] items-center rounded-sm border-[#f8f8f8] px-[20px] my-[100px] pb-14 shadow-xl">
                         <div className="items-center mt-[25px]">
                             <h6 className="flex items-center justify-center text-[33px] font-bold text-[#3694e6]">
                                 Add Interviewer
@@ -74,13 +74,6 @@ const InterviewerAdd = () => {
                                 />
                             </label>
                         </div>
-
- 
-     
-
-
-
-   
 
                         {error && <p className="text-red-500 mt-[20px]">{error}</p>}
                         {success && <p className="text-green-500 mt-[20px]">{success}</p>}
