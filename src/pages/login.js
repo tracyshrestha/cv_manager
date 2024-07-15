@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import mailLineIcon from '../assets/mail-line.png';
 import vectorIcon from '../assets/vector.png';
@@ -8,8 +8,21 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [isTokenSet, setIsTokenSet] = useState(false)
   const navigate = useNavigate();
- 
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setIsTokenSet(true)
+    }
+  }, [])
+  useEffect(() => {
+    if (isTokenSet) {
+      navigate('/admindash')
+    }
+  }, [isTokenSet])
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError(null);
@@ -27,8 +40,9 @@ function Login() {
       const result = await response.json();
 
       if (response.ok) {
-        console.log('Login successful:', result);
-        navigate('/admindash');
+        localStorage.setItem('token', result.token); // Save token to local storage
+        setIsTokenSet(true)
+
       } else {
         setError(result.msg || 'Login failed. Please try again.');
       }
@@ -36,6 +50,7 @@ function Login() {
       setError('An error occurred. Please try again.');
     }
   };
+
 
   return (
     <div className="w-screen h-screen grid grid-cols-1 xl:grid-cols-2 bg-[#fde5e5]">

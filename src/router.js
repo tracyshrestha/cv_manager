@@ -1,4 +1,5 @@
-import { createBrowserRouter } from 'react-router-dom';
+import React from 'react';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import NotFound from './pages/notFound';
 import Login from './pages/login';
 import CvUpload from './admin/cvUpload';
@@ -15,13 +16,13 @@ import SendRejection from './admin/sendRejection';
 import AssessmentAsign from './admin/assessmentAsign';
 import Bgcheck from './admin/bgcheck';
 import SendOfferLetter from './admin/sendOfferLetter';
+import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Login />,
     },
-
     {
         path: '/signup',
         element: <Signup />,
@@ -29,59 +30,59 @@ const router = createBrowserRouter([
     {
         element: <MainLayout />, 
         children: [
-            
+
             {
                 path: '/admindash',
-                element: <Admindash />,
+                element: <ProtectedRoute element={<Admindash />} />,
             },
             {
                 path: '/cvupload',
-                element: <CvUpload />,
+                element: <ProtectedRoute element={<CvUpload />} />,
             },
             {
                 path: '/usercvlist',
-                element: <UserCvList />,
+                element: <ProtectedRoute element={<UserCvList />} />,
             },
             {
                 path: '/hiredcvlist',
-                element: <HiredCvList />,
+                element: <ProtectedRoute element={<HiredCvList />} />,
             },
             {
                 path: '/usercvview',
-                element: <UserCvView />,
+                element: <ProtectedRoute element={<UserCvView />} />,
             },
             {
                 path: '/schinterview',
-                element: <SchInterview />,
+                element: <ProtectedRoute element={<SchInterview />} />,
             },
             {
                 path: '/interviewer',
-                element: <Interviewer />,
+                element: <ProtectedRoute element={<Interviewer />} />,
             },
             {
                 path: '/addinterviewer',
-                element: <AddInterviewer />,
+                element: <ProtectedRoute element={<AddInterviewer />} />,
             },
             {
                 path: '/assessmentasign',
-                element: <AssessmentAsign />,
+                element: <ProtectedRoute element={<AssessmentAsign />} />,
             },
             {
                 path: '/sendrejection',
-                element: <SendRejection />,
+                element: <ProtectedRoute element={<SendRejection />} />,
             },
             {
                 path: '/sendofferletter',
-                element: <SendOfferLetter />,
+                element: <ProtectedRoute element={<SendOfferLetter />} />,
             },
             {
                 path: '/bgcheck',
-                element: <Bgcheck />,
+                element: <ProtectedRoute element={<Bgcheck />} />,
             },
         ],
     },
     {
-        path: '/*',
+        path: '*',
         element: <NotFound />,
     },
 ]);

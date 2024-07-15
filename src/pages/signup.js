@@ -112,7 +112,7 @@ function Signup() {
           <div className="mt-[30px] text-center text-gray-500">
             <p className="sm:text-l text-center text-[14px]">
               Already have an account?
-              <a href="/login" className="text-[15px] text-[#42ADF0] hover:text-[#4D6B9C] sm:text-[15px]">
+              <a href="/" className="text-[15px] text-[#42ADF0] hover:text-[#4D6B9C] sm:text-[15px]">
                 Log In
               </a>
             </p>
