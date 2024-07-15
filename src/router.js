@@ -1,8 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import NotFound from './pages/notFound';
 import Login from './pages/login';
-import Login2 from './pages/login2';
-import Practice from './pages/practice';
 import CvUpload from './admin/cvUpload';
 import Signup from './pages/signup';
 import MainLayout from './pages/mainLayout'; 
@@ -23,10 +21,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <Login />,
     },
-    {
-        path: '/login2',
-        element: <Login2 />,
-    },
+
     {
         path: '/signup',
         element: <Signup />,
@@ -34,10 +29,7 @@ const router = createBrowserRouter([
     {
         element: <MainLayout />, 
         children: [
-            {
-                path: '/practice',
-                element: <Practice />,
-            },
+            
             {
                 path: '/admindash',
                 element: <Admindash />,
